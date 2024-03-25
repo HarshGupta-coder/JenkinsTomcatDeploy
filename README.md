@@ -1,5 +1,3 @@
-Below is the updated README.md file with every single Linux command you've written, formatted in Markdown:
-
 ```markdown
 # Deploy to Tomcat Server
 
@@ -59,6 +57,10 @@ This guide outlines the steps to deploy a project to a Tomcat server using Jenki
   JAVA_HOME=<path to Java>
   PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2:$M2_HOME
   ```
+  - Use the following command to find the path to Java:
+    ```bash
+    find /usr/lib/jvm -name java
+    ```
 - Apply changes:
   ```bash
   source ~/.bash_profile
@@ -72,6 +74,10 @@ This guide outlines the steps to deploy a project to a Tomcat server using Jenki
   - Manage Jenkins > Global Tool Configuration
   - Add Maven: Name - `maven`, MAVEN_HOME - `/opt/maven`, untick "Install automatically"
   - Add Java: Name - `java`, JAVA_HOME - `<path to Java>`, untick "Install automatically"
+  - Use the following command to find the path to Java:
+    ```bash
+    find /usr/lib/jvm -name java
+    ```
 
 ## Step 4: Setup Tomcat Server
 
@@ -90,12 +96,27 @@ This guide outlines the steps to deploy a project to a Tomcat server using Jenki
   ```bash
   find /opt/tomcat -name context.xml
   ```
-  Comment out relevant lines in the file.
+  Edit the `context.xml` files in the `webapps/host-manager/META-INF` and `webapps/manager/META-INF` directories. Comment out the following lines in these files:
+  ```xml
+  <!--
+  <Valve className= .......
+          ...........::1|0:0:0:1" />
+  -->
+  ```
 - Update `tomcat-users.xml` file for Manager access:
   ```bash
   sudo vi /opt/tomcat/conf/tomcat-users.xml
   ```
-  Add users and roles.
+  Add the following lines to the end of the file:
+  ```xml
+  <role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <role rolename="manager-jmx"/>
+  <role rolename="manager-status"/>
+  <user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+  <user username="deployer" password="deployer" roles="manager-script"/>
+  <user username="tomcat" password="s3cret" roles="manager-gui"/>
+  ```
 - Restart Tomcat service:
   ```bash
   tomcatdown
@@ -121,5 +142,3 @@ This guide outlines the steps to deploy a project to a Tomcat server using Jenki
   - Tomcat URL: `http://<instance_ip>:8080/`
 
 ```
-
-This README.md file includes every single Linux command you've written, formatted in Markdown within code blocks for clarity. Feel free to use it in your GitHub repository documentation.
