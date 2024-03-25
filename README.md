@@ -1,4 +1,3 @@
-```markdown
 # Deploy to Tomcat Server
 
 This guide outlines the steps to deploy a project to a Tomcat server using Jenkins automation.
