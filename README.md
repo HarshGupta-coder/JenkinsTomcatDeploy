@@ -135,12 +135,15 @@ This guide outlines the steps to deploy a project to a Tomcat server using Jenki
 ## Step 6: Configure the Jenkins Job
 
 - Create a new Jenkins job (e.g., "deployToTomcat") as a Maven project.
-- Configure Git repository URL in SCM section.
+- Configure Git repository URL in SCM section. That is: https://github.com/HarshGupta-coder/hello-world.git
 - Set Maven build goals and options to `clean install`.
 - Add a post-build action "Deploy war/ear to a container":
   - WAR/EAR files: `**/*.war`
   - Add container: `Tomcat 8.x Remote`
   - Credentials: Use previously added credentials
   - Tomcat URL: `http://<instance_ip>:8080/`
+
+  
+![image](https://github.com/HarshGupta-coder/JenkinsTomcatDeploy/assets/54001485/92a295de-35bc-4209-b871-e8a9187eb723)
 
 Speacial Thanks to AR Shankar | Valaxy Technologies (AWS, DevOps Specialist)
