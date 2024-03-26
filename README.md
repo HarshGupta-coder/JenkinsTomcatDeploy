@@ -2,6 +2,9 @@
 
 This guide outlines the steps to deploy a project to a Tomcat server using Jenkins automation.
 
+![Screenshot (120)](https://github.com/HarshGupta-coder/JenkinsTomcatDeploy/assets/54001485/93bb7873-8eaa-43e8-9c43-32a4ce66c574)
+
+
 ## Step 1: Setup Jenkins Server
 
 - Launch an EC2 instance with Amazon Linux 2 AMI.
